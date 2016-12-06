@@ -1,0 +1,40 @@
+<ons-page var='lkl.page.cameraList' ng-controller='cameraForeshowList'> 
+<ons-toolbar>
+	<div class="left">
+		<ons-back-button></ons-back-button>
+	</div>
+	<div class="center">直播预告</div>
+</ons-toolbar> 
+
+<ons-scroller style="position: absolute; left: 0px; top: 0px; bottom:0px;right:0px;" class='pagecontentgraycolor'>
+	<div>
+		<div ng-if='foreshowArr.length!=0' ng-repeat='data in foreshowArr' class="itemdivcontent marginbottom">
+			<ons-list-item  style="border-bottom:0px" modifier="tappable">
+			<ons-row style='margin:0px;padding:10px 0px'>
+				<ons-col align='center' width='25px'>
+					<ons-icon style="color:#05aae8;" icon="ion-videocamera"></ons-icon>
+				</ons-col> 
+				<ons-col align='left'>
+					<ons-row class="itemrowcommon">
+						<span class="itemtexttitle" ng-bind="data.video_name"></span>
+					</ons-row>
+					<ons-row class="itemrowcommon">
+						<span class="itemtextcontent" ng-bind="data.address"></span>
+					</ons-row>
+					<ons-row class="itemrowcommon" ng-if="data.starttime && data.endtime">
+						<span class="itemtextcontent" ng-bind="data.starttime + ' 至  ' + data.endtime"></span>
+					</ons-row>
+				</ons-col>
+				<ons-col align='center'  width='70px' ng-if="data.thumbnail">
+					<img style="width:70px;height:50px;vertical-align: middle;" ng-src="{{ImgBase + data.thumbnail}}" />
+				</ons-col>
+			</ons-row>
+			</ons-list-item>
+		</div>
+		<!-- <div style='padding:10px 18px'>
+		<ons-button ng-click="jobInviteList.createJobInviteInfo()"
+					modifier="lkl--large--cta2">创建新职位</ons-button>
+		</div> -->
+	</div>
+</ons-scroller> 
+</ons-page>

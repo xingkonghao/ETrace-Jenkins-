@@ -1,0 +1,102 @@
+<ons-page var='lkl.page.shopList' ng-controller='shop'> 
+<ons-toolbar>
+	<div class="left">
+		<ons-back-button>返回</ons-back-button>
+	</div>
+	<div class="center">选择所在购物场所</div>
+</ons-toolbar> 
+<div ng-if='isLoadSuccess' style="position: absolute; left: 0px; top: 0px; bottom:0px;right:0px;" class='pagecontentgraycolor'>
+	<ons-row  class="itemdivcontentnoborder marginbottom "
+			style="margin:0px 0px;padding:6px 8px 6px 0px" modifier="tappable" >
+		<ons-col width='25px'  align='right'>
+			<ons-icon style='color:rgb(33,171,56);margin-top:1px' icon="ion-location">
+		</ons-col>
+		<ons-col>
+			<span class="colordgraytxt itemtexttitle text_small" >{{'当前：' + locationInfo.addr}}</span>
+		</ons-col>
+		<ons-col width='35px' align='center' ng-click='relocation()'>
+			<ons-icon style='color:#999;' icon="ion-ios7-refresh-empty">
+		</ons-col>
+	</ons-row>
+	<ons-row  class="itemdivcontenttwoborder" style="margin:0px;background-color: rgba(0, 0, 0, 0);padding:0px 5px">
+		<ons-col>
+			<span style="padding:15px 12px 6px 12px" class="colordgraytxt itemtexttitle text_small" >附近商家</span>
+		</ons-col>
+	</ons-row>
+	<ons-list style="border-width: 0px;background-color: rgba(0, 0, 0, 0);" 
+		ng-if="shopData.shopNearbyArr.length > 0">
+		<ons-list-item ng-repeat='data in shopData.shopNearbyArr track by $index' class="itemdivcontent"
+			style="padding:6px 10px" modifier="tappable" ng-click='clickShop(data)'>
+			<ons-row style="line-height:22px">
+				<ons-col> 
+				<div>
+					<span class=" itemtexttitle text_medium" ng-bind="data.node_name"></span>
+					<!-- <span style="padding-top:0px;padding-bottom:0px" class="itemtexttitle colordgraytxt text_small"
+						ng-bind="'地址:' + data.addr"></span> -->
+				</div>
+				</ons-col>
+				<ons-col width='50px' align='right'> 
+					<span class="colordgraytxt text_small" ng-bind="data.mile || ''"></span>
+				</ons-col>
+			</ons-row>
+			<ons-row style="line-height:22px">
+				<ons-col> 
+				<div>
+					<span style="padding-top:5px;padding-bottom:0px" class="itemtexttitle colordgraytxt text_small"
+						ng-bind="'地址:' + data.addr"></span>
+				</div>
+				</ons-col>
+			</ons-row>
+		</ons-list-item>
+		<ons-row ng-if='false' width='100%' class="w100" align='center'  ng-click='shopData.showShopList()'
+			style="margin:25px 0px;padding:5px 8px" modifier="tappable" >
+			<ons-col align='center'>
+				<span class="colordgraytxt text_small"  >没找到购物场所? 手动选择</span>
+			</ons-col>
+		</ons-row>
+		<ons-row  class="" align='center'
+			style="margin:25px 0px;padding:5px 8px" modifier="tappable" >
+			<ons-col >
+			</ons-col>
+			<ons-col width='136px'>
+				<span class="colordblacktxt itemtexttitle text_small"  >没找到购物场所?</span>
+			</ons-col>
+			<ons-col width='80px' ng-click='shopData.showShopList()'>
+				<span style='color:rgb(33,171,56);' class=" itemtexttitle text_medium_s" >手动选择</span>
+			</ons-col>
+			<ons-col >
+			</ons-col>
+		</ons-row>
+	</ons-list>
+	
+</div> 
+<div ng-if='!isLoadSuccess && isOnLine' style="position: absolute; left: 0px; top: 0px; bottom:0px;right:0px;" class='pagecontentgraycolor'>
+	<div align="center"  style="padding-top: 40%"> 
+		<img style='width:88px; height:88px;' ng-src="images/load_page_failed.png">
+	</div>
+	<div style="padding: 0px 15px; ">
+		<p class="text_medium colordgraytxt" style='margin: 0px 0px 10px 0px; overflow:hidden;text-align: center;'>
+			页面加载失败</p>
+	</div>
+	<ons-row align='center' ng-click='reloadShop()'>
+		<ons-col>
+		<span class="grayborderbtn itemtexttitle text_small" style='width:100px' >重新加载</span>
+		</ons-col>
+	</ons-row>
+</div>
+<div ng-if='!isOnLine' style="position: absolute; left: 0px; top: 0px; bottom:0px;right:0px;" class='pagecontentgraycolor'>
+	<div align="center"  style="padding-top: 40%"> 
+		<img style='width:88px; height:88px;' ng-src="images/load_offline.png">
+	</div>
+	<div style="padding: 0px 15px; ">
+		<p class="text_medium colordgraytxt" style='margin: 0px 0px 10px 0px; overflow:hidden;text-align: center;'>
+			网络异常，请检查网络</p>
+	</div>
+	<ons-row align='center' ng-click='reloadShop()'>
+		<ons-col>
+		<span class="grayborderbtn itemtexttitle text_small" style='width:100px' >重新加载</span>
+		</ons-col>
+	</ons-row>
+</div>
+
+</ons-page>

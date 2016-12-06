@@ -1,0 +1,13 @@
+<ons-page var="myPage">
+<ons-toolbar>
+	<div class="left">
+		<ons-back-button></ons-back-button>
+	</div>
+	<div class="center" style="overflow: scroll;" ng-bind="othercontent.title"></div>
+	<div ng-show='othercontent.righttxt' class="right" ng-click='othercontent.rightcallback(othercontent.rightparam)' >
+		<ons-toolbar-button >{{othercontent.righttxt}}</ons-toolbar-button>
+	</div>
+</ons-toolbar>
+<iframe name="toppage" width=100% height=100% marginwidth=0 marginheight=0
+	 ng-src="{{trustSrc(othercontent.html)}}" ></iframe>
+</ons-page> 

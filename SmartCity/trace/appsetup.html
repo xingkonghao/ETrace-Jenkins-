@@ -1,0 +1,40 @@
+<ons-page ng-controller='appsetup'> 
+<ons-toolbar>
+	<div class="left">
+		<ons-back-button></ons-back-button>
+	</div>
+	<div class="center">设置</div>
+</ons-toolbar>
+
+<ons-scroller class='h100 pagecontentgraycolor'> 
+<div>
+<div ng-if='false'>
+	<div style="text-align:center;">
+		<img style="width: 200px;height: 100px;" ng-src="images/logo.png">
+	</div>
+	<div style="text-align:center;">
+		<span style="color:rgb(150,150,150); padding-bottom:3px;"> {{settings.appversion}}</span>
+	</div>
+</div>
+<ons-list> 
+	<ons-list-item ng-click='appsetup.aboutUs()' class="spacemaintext first" modifier="chevron"> 
+		<label>关于我们</label> 
+	</ons-list-item>
+	<ons-list-item class="spacemaintext first" ng-show="!appsetup.isIos()" modifier="tappable"> 
+		<ons-row>	
+			<ons-col><label>版本信息</label> </ons-col>
+			<ons-col align="right">
+			<span style="color:rgb(241,83,81);" ng-bind="'V' + versionName"></span>
+			</ons-col>
+		</ons-row>
+	</ons-list-item>
+	<!-- <p class="spaceintervalp"></p>
+	<ons-list-item class="spacemaintext first" modifier="tappable" align="center" ng-click="loginout()">
+		<label>{{isAdmin() ? '退出登录' : '录入员登录'}}</label>
+	</ons-list-item>  -->
+</ons-list> 
+<p class="spaceintervalp"></p>
+</div>
+</ons-scroller>
+
+</ons-page>

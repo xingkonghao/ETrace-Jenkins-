@@ -1,0 +1,169 @@
+<ons-page var='lkl.page.main' data-ng-init="main.autoCarousel();"> 
+<ons-toolbar>
+	<div class="center">北京E追溯</div>
+ </ons-toolbar> 
+
+<ons-scroller id="main_scroll" style="position: absolute; left: 0px; top: 0px; bottom:0px;right:0px;" class='pagecontentgraycolor'>
+	<ons-carousel var='recommendCarousel'  ng-click='recommendClick()' swipeable overscrollable auto-scroll style="width: 100%; height: 260px">
+	 <!-- <ons-carousel-item ng-click="cameraloader.clickRecommend(data)" ng-repeat='data in recommendInfo.recommendArr'  >
+      	<div style=" position:absolute; right:0px; left:0px; width: 100%; 
+      		 height: 30px; bottom: 0px; padding: 5px; background-color: rgba(30,30,30,0.5);">
+      	<span ng-bind='data.name' style="color:white;"></span>	
+      	</div>
+      	<img class='h100 w100' src={{data.img}}></img>
+	 	<div class='h100' style="background-image:url({{data.img}});background-repeat:no-repeat;background-size:100% 100%;"></div>
+    	 <div class='xxsmall' style='text-align: center; height:20px;position: absolute; left: 0px; bottom: 0px; right:0px;'>
+			<ons-icon ng-repeat='data in recommendInfo.recommendArr' style='padding-right: 3px;' icon='ion-record'
+			ng-class="{color03b8ee:$index==$parent.$index,colord7d7d7:$index!=$parent.$index}"
+			></ons-icon>
+		</div>
+    </ons-carousel-item> -->
+	    <ons-carousel-item  ng-click='recommendClick()'>
+	      <div class='h100' style="background-image:url('images/show.png');background-repeat:no-repeat;background-size:100% 100%;"></div>
+	      	<div class="item-label">BLUE</div>
+	    </ons-carousel-item>
+    </ons-carousel>
+	<ons-row style='margin:10px 0px;background-color: white;'>
+		<ons-col class='mainitem' width="50%" height="100%" align='center' 
+			ng-click="trace.scanQRCode()">
+			<ons-row align='center' >
+				<div style="text-align: center;width: 100%; ">
+			 		<img  style='height:60px;'  src = 'images/erweima.png'></img>
+			 	</div>
+			 </ons-row>
+			<ons-row align='center'> 
+				<div style="text-align: center;width: 100%;padding: 6px 0px;">
+			 		<span class='mainname text_medium'>二维码查询</span>
+			 	</div>
+			</ons-row>
+		</ons-col> 
+		<ons-col width="1px" style="height:90px" align='center'>
+			<div class='h100' style="width:1px;background-color:rgb(216,216,216)"> </div>
+		</ons-col> 
+		<ons-col class='mainitem' width="49%" align='center' ng-click="trace.traceBarCode()">
+			<ons-row align='center'>
+				<div style="text-align: center;width: 100%;">
+			 		<img style='height:60px;' src = 'images/tiaoma.png'></img>
+			 	</div>
+			</ons-row>
+			<ons-row align='center'> 
+				<div style="text-align: center;width: 100%;padding: 6px 0px;">
+			 		<span class='mainname text_medium'>条形码查询</span>
+			 	</div>
+			</ons-row>
+		</ons-col>
+	</ons-row>
+	<ons-row class='pagecontentwhitecolor w100' style="padding:10px 10px 0px 10px; margin:10px 10px 0px 0px;">
+		<ons-col >
+			<div style="height:20px;border-left: 3px solid #22ab38;">
+				<span style='height: 22px;vertical-align: middle;line-height: 25px;padding-left: 3px;'
+					class='mainname text_medium' >追溯码查询</span>
+			</div>
+		</ons-col>
+	</ons-row>
+	<ons-row class='pagecontentwhitecolor w100' style='padding:0px 10px 0px 10px; margin:0px 10px 0px 0px;'>
+		<ons-row  style='margin:12px 0px;border: 1px solid #9a9a9a; border-radius:3px;'>
+		<ons-col >
+			<div >
+			<!-- <form ng-submit='trace.searchCodeData()'>
+				  <input type="text" id='trace_code_input'
+				  	autocomplete="off"
+				  	maxlength="20"
+			  		style='padding:6px 6px;height:32px'
+			  		name='serachstr'
+					class="text_medium form-control a_form-control" 
+					ng-model="trace.inputTraceCode"
+					placeholder="输入追溯码查询(数字)"></input>
+			</form> -->
+			<span ng-show='trace.inputTraceCode.length > 0' style='padding:6px 6px;height:32px' class="text_medium form-control a_form-control" 
+				ng-bind="trace.inputTraceCode" ng-click='showTraceCodeKeyboard()'></span>
+			<span ng-show='trace.inputTraceCode.length == 0' style='padding:6px 6px;height:32px' class="text_medium colordgraytxt form-control a_form-control" 
+				ng-click='showTraceCodeKeyboard()'>输入追溯码查询</span>
+			</div>	
+		</ons-col>
+		<ons-col ng-show='trace.inputTraceCode.length > 0' width='50px' height='38px' align='center' ng-click=''>
+			<span class="input-group-addon a_input-group-addon" ng-click="trace.inputTraceCode = ''">
+		  		<ons-icon ng-show='trace.inputTraceCode' icon="ion-ios7-close" style="font-size: 16px; color: #bbb"></ons-icon>
+		  	</span>
+		</ons-col>
+		<ons-col ng-show='trace.inputTraceCode.length > 0' width='50px' height='38px' align='center' 
+			ng-click='trace.searchCodeData()'>
+			<span class="text_medium colordgraytxt" style="padding-top:20px; ">
+			  	搜索
+			</span>
+		</ons-col>
+		</ons-row>
+	</ons-row>
+	<div ng-show='isShowTraceCodeKeyboard' class='pagecontentwhitecolor w100' style='margin-top:12px;height:6px'></div>
+	<div ng-show='isShowTraceCodeKeyboard' class='pagecontentwhitecolor w100'>
+		<ons-row align='center' class="num_top_border">
+			<ons-col align='center' class="num_right_border" class="num_right_border">
+				<ons-list-item modifier="tappable" ng-click="inputTraceCode('1')">
+					<span class="text_x_large colordblacktxt" >1</span>
+				</ons-list-item>
+			</ons-col>
+			<ons-col align='center' class="num_right_border">
+				<ons-list-item modifier="tappable" ng-click="inputTraceCode('2')">
+					<span class="text_x_large colordblacktxt" >2</span>
+				</ons-list-item>
+			</ons-col>
+			<ons-col align='center'>
+				<ons-list-item modifier="tappable" ng-click="inputTraceCode('3')">
+					<span class="text_x_large colordblacktxt" >3</span>
+				</ons-list-item>
+			</ons-col>
+		</ons-row>
+		<ons-row align='center' class="num_top_border">
+			<ons-col align='center' class="num_right_border">
+				<ons-list-item modifier="tappable" ng-click="inputTraceCode('4')">
+					<span class="text_x_large colordblacktxt" >4</span>
+				</ons-list-item>
+			</ons-col>
+			<ons-col align='center' class="num_right_border">
+				<ons-list-item modifier="tappable" ng-click="inputTraceCode('5')">
+					<span class="text_x_large colordblacktxt" >5</span>
+				</ons-list-item>
+			</ons-col>
+			<ons-col align='center' >
+				<ons-list-item modifier="tappable" ng-click="inputTraceCode('6')">
+					<span class="text_x_large colordblacktxt" >6</span>
+				</ons-list-item>
+			</ons-col>
+		</ons-row>
+		<ons-row align='center' class="num_top_border">
+			<ons-col align='center' class="num_right_border">
+				<ons-list-item modifier="tappable" ng-click="inputTraceCode('7')">
+					<span class="text_x_large colordblacktxt" >7</span>
+				</ons-list-item>
+			</ons-col>
+			<ons-col align='center' class="num_right_border">
+				<ons-list-item modifier="tappable" ng-click="inputTraceCode('8')">
+					<span class="text_x_large colordblacktxt" >8</span>
+				</ons-list-item>
+			</ons-col>
+			<ons-col align='center' >
+				<ons-list-item modifier="tappable" ng-click="inputTraceCode('9')">
+					<span class="text_x_large colordblacktxt" >9</span>
+				</ons-list-item>
+			</ons-col>
+		</ons-row>
+		<ons-row align='center' class="num_top_border ">
+			<ons-col align='center' class="num_right_border">
+				<ons-list-item modifier="tappable" ng-click="hideTraceCodeKeyboard()">
+					<ons-icon icon="ion-chevron-down" style="font-size: 19px;" class="colordblacktxt"></ons-icon>
+				</ons-list-item>
+			</ons-col>
+			<ons-col align='center' class="num_right_border">
+				<ons-list-item modifier="tappable" ng-click="inputTraceCode('0')">
+					<span class="text_x_large colordblacktxt" >0</span>
+				</ons-list-item>
+			</ons-col>
+			<ons-col align='center' >
+				<ons-list-item modifier="tappable" ng-click="deleteTraceCode()">
+					<ons-icon icon="ion-close-round" style="font-size: 19px;" class="colordblacktxt"></ons-icon>
+				</ons-list-item>
+			</ons-col>
+		</ons-row>
+	</div>
+</ons-scroller> 
+</ons-page>

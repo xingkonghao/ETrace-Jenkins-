@@ -1,0 +1,130 @@
+<!DOCTYPE html>  
+<html lang="en" ng-app="app">
+<head > 
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="format-detection" content="telephone=no" />
+<meta name="msapplication-tap-highlight" content="no" />
+<title>北京E追溯</title>
+
+
+<link rel="stylesheet" href="css/modify_boot.css">
+<link rel="stylesheet" href="css/onsenui-1.2.1.css">
+<link rel="stylesheet" href="css/onsen-css-components-lkl.css">
+<link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="css/position.css">
+<!--   
+<script type="text/javascript" src="cordova.js"></script>
+<script type="text/javascript" src="cordova_plugins.js"></script>
+-->
+<script src="js/angular/angular-1.2.10.js"></script>
+<script src="js/angular/angular-sanitize.js"></script>
+<script src="js/modernizr/modernizr.js"></script>
+<!-- <script src="js/iscroll/iscroll-probe.js"></script> -->
+<script src="js/onsenui-1.2.1.js"></script>
+<script src="js/ngerror.js"></script>
+<script src="js/system/config.js"></script>
+<script type='text/javascript'> 
+	var lkl = angular.module('app', [ 'onsen','ngError']);
+</script>     
+
+</head>  
+
+<body id="mainBody" ng-controller="global">
+	<ons-navigator animation='none' page="app.html" var="lkl.nav">
+		
+	</ons-navigator>
+	<ons-modal var="lkl.modal.loading">
+		<img style='width:25px;height:auto;' src='images/loading.gif' />
+  		<br />
+  		<lable ng-bind='loadingText'></lable>
+	</ons-modal>
+	<ons-modal var="lkl.modal.choicemodal" ng-click='choiceModal.cancelChoice()'>
+		<div style='position:absolute;left:30px;right:30px;max-heigth:100%;top:30px;bottom:30px;overflow:auto;' class='middlevertical'>
+			<ons-list class='w100'>
+			     <ons-list-header style="background-color: rgb(217,235,253);height:35px;line-height:35px">{{choiceModal.choiceTitle}}</ons-list-header>
+			</ons-list>
+			<ons-list class='w100'>
+				 <ons-list-item modifier="tappablelkl" ng-repeat="choiceitem in choiceModal.choiceArr" 
+				 	ng-click="choiceModal.itemClick(choiceitem,$index);$event.stopPropagation();">
+			     	{{choiceitem.name}}
+			     </ons-list-item>
+			</ons-list>
+			<ons-list class='w100'>
+			 	<ons-list-item class="spacemaintext itemonslistitem first" style='height:35px;line-height:30px' 
+			 			 modifier="tappable" align="center" ng-click="choiceModal.cancelChoice();$event.stopPropagation();">
+				<label>取消</label>
+				</ons-list-item>  
+			</ons-list>
+		</div>
+	</ons-modal>
+	<ons-modal var="lkl.modal.more" ng-click='lkl.modal.more.hide()' style='background-color:transparent;'>
+		<div style='position:absolute;left:30px;right:2px;max-heigth:100%;top:30px;bottom:40px;overflow:auto;' class='endvertical'>
+			<ons-list style='width: 35%;'>
+				 <ons-list-item modifier="tappablelkl" ng-repeat="choiceitem in typeInfo.typeSubArr" 
+				 	ng-click="typeInfo.selectSubType(choiceitem,$index);">
+			     	<img style="width:30px;height:30px;vertical-align:middle;" ng-src="{{ImgBase + choiceitem.type_icon}}" />
+					<span class='itemtextsubtitle' ng-bind="choiceitem.name"></span>
+			     </ons-list-item>
+			</ons-list>
+		</div>
+	</ons-modal>
+	<ons-modal var="lkl.modal.inputmodal" ng-click='inputModal.cancelClick();$event.stopPropagation();'>
+	<div style='position:absolute;left:30px;right:30px;max-heigth:100%;top:30px;bottom:30px;overflow:auto;' 
+		 class='middlevertical'>
+		<ons-list class='w100' ng-click='$event.stopPropagation();'>
+		     <ons-list-header style="background-color: rgb(217,235,253);height:35px;line-height:35px">
+		     	<span ng-bind="inputModal.title"></span>
+		     </ons-list-header>
+		</ons-list>
+		<div ng-if="inputModal.msg" ng-click='$event.stopPropagation();'
+			class="w100" style="min-height:50px;background-color:#fefefe;display:block;padding:10px 8px 3px 8px;">
+			<span class="w100" style="display:block;white-space:pre-wrap;color:rgb(31,31,31);text-align:left;font-size: 15px;" 
+				ng-bind="inputModal.msg"></span>
+		</div>
+		<div class="w100" ng-if='inputModal.inputMode' ng-click='$event.stopPropagation();' style="background-color:#fefefe;">
+			<input type="text" class="form-control a_form-control w100" ng-model="inputModal.inputstr" placeholder="请输入..."></input>
+		</div>
+		<ons-list class='w100' ng-click='$event.stopPropagation();'>
+		<ons-row>
+			<ons-col>
+		 	<ons-list-item class="spacemaintext itemonslistitem first" style='height:35px;line-height:30px' 
+		 			 modifier="tappable" align="center" ng-click="inputModal.confirmClick();$event.stopPropagation();">
+			<label>确定</label>
+			</ons-list-item> 
+			</ons-col>
+			<ons-col ng-if='!inputModal.alertMode'>
+		 	<ons-list-item  style='border-right: 1px solid rgb(221,221,221);height:35px;line-height:30px' 
+		 			 class="spacemaintext itemonslistitem first" modifier="tappable" align="center" ng-click="inputModal.cancelClick();">
+			<label>取消</label>
+			</ons-list-item> 
+			</ons-col>
+		</ons-row>
+		</ons-list>
+	</div>
+	</ons-modal>
+	<div id='lkltooltip' ng-class='{tooltip:tooltip.classtooltip,aligncenter:true,hide:tooltip.classhide,showblock:tooltip.classshowblock,opacity0:tooltip.classopacity0}' style='line-height:2em;background-color:#22ab38;position:fixed;bottom:0px;left:0px;right:0px;z-index:999;'>
+		<span ng-bind='tooltip.message'></span>
+	</div>
+	
+	<div ng-if="isNotInit" class='h100 w100' style='position:absolute; left:0px; top:0px;z-index:99999; background-color: white' >
+		
+	</div>
+	<!--  service -->
+	<script src="js/services/connectServer.js"></script>
+	<script src="js/services/mobileapi.js"></script>
+	<script src="js/services/utils.js"></script>
+	<script src="js/services/pluginService.js"></script> 
+	
+	<!-- controller -->
+	<script src="js/controllers/global.js"></script>
+	<script src="js/controllers/apploader.js"></script>
+	<script src="js/controllers/shop.js"></script>
+	<script src="js/controllers/search.js"></script>
+	
+	<!-- app -->
+	<!-- <script src="js/app.js"></script> -->
+</body>
+</html>

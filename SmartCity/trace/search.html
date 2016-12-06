@@ -1,0 +1,78 @@
+<ons-page var='lkl.page.search' ng-controller='search'> 
+<ons-row height='44px' align='center' style="height:44px;padding: 0px 15px 0px 9px;background-color:#22ab38;position: absolute; left: 0px; top: 0px;">
+	<ons-col width='70px' align='left' ng-click='lkl.nav.popPage();'>
+		<ons-icon icon="ion-ios7-arrow-back" class="title" style="font-size:36px"></ons-icon>
+		<span class="text_medium title" style="text-align:center">
+		  	返回
+		 </span>
+	</ons-col>
+	<ons-col>
+		<div class="input-group">
+		  <span class="input-group-addon a_input-group-addon">
+		  	<ons-icon icon="ion-search" style="color: #22ab38"></ons-icon>
+		  </span>
+		  <form ng-submit='searchShop()'>
+			  <input type="text" id="search_input"
+			  		style='padding:3px 12px;height:30px;text-align:center;'
+			  		autocomplete="off"
+			  		name='serachstr'
+					class="form-control a_form-control" 
+					ng-model="searchStr"
+					placeholder="请输入商家名称"></input>
+		  </form>
+		  <span class="input-group-addon a_input-group-addon" style='padding: 6px 15px;' ng-click='cleanSearchStr()'>
+		  		<ons-icon ng-show='searchStr.length > 0' icon="ion-ios7-close" style="font-size: 16px; color: #bbb"></ons-icon>
+		  </span>
+		 </div>
+	</ons-col>
+	<ons-col width='50px' align='right' ng-click='searchShop()'>
+		<span class="text_medium title" >
+		  	搜索
+		</span>
+	</ons-col>
+</ons-row>
+<ons-scroller ng-show='isLoadSuccess' style="position: absolute; left: 0px; top: 44px; bottom:0px;right:0px;" class='pagecontentgraycolor'>
+	<div ng-if='isShowHistory()'>
+		<div style='padding:12px 0px 3px 15px;'>
+			<span class="text_micro colordgraytxt">搜索历史</span>
+		</div>
+		<div ng-repeat='data in searchShopHistory track by $index' class="itemdivcontent itemcolor">
+			<ons-list-item  style="border-bottom:0px"  ng-click="clickHistoryItem(data.name)" >
+				<span class="itemtexttitle text_medium" ng-bind="data.name"></span>
+			</ons-list-item>
+		</div>
+	
+	 	<ons-row class="btn-group" style="margin-top:40px">
+	 		<ons-col align='center'>
+		    	<button type="button" ng-click="cleanSearchHistory()" class="btn b_btn_default text_small">清空搜索历史</button>
+		    </ons-col>
+		</ons-row>
+	</div>
+	<div ng-if='isShowResult()'>
+		<div ng-show='shopArr.length > 0' ng-repeat='data in shopArr' class="itemdivcontent itemcolor">
+			<ons-list-item  style="border-bottom:0px"  ng-click="clickChoiceShop(data)" modifier="chevron">
+				<span class="itemtexttitle text_medium" ng-bind="data.node_name"></span>
+			</ons-list-item>
+		</div>
+		<ons-row ng-show='isShowEmpty' style="margin-top:144px">
+	 		<ons-col align='center'>
+		    	<span class="colordgraytxt text_small" >抱歉！没有找到您想搜索的内容</span>
+		    </ons-col>
+		</ons-row>
+	</div>
+</ons-scroller> 
+<div ng-show='!isLoadSuccess' style="position: absolute; left: 0px; top: 44px; bottom:0px;right:0px;" class='pagecontentgraycolor'>
+	<div align="center"  style="padding-top: 40%"> 
+		<img style='width:88px; height:88px;' ng-src="images/load_page_failed.png">
+	</div>
+	<div style="padding: 0px 15px; ">
+		<p class="text_medium colordgraytxt" style='margin: 0px 0px 10px 0px; overflow:hidden;text-align: center;'>
+			页面加载失败</p>
+	</div>
+	<ons-row align='center' ng-click='searchShopNow()'>
+		<ons-col>
+		<span class="grayborderbtn itemtexttitle text_small" style='width:100px' >重新加载</span>
+		</ons-col>
+	</ons-row>
+</div>
+</ons-page>

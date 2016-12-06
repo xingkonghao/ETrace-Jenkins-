@@ -1,0 +1,223 @@
+<ons-page var='lkl.page.traceresult'>
+	<ons-toolbar>
+		<div class="left">
+			<ons-back-button ng-show="trace.isOnTraceCodeSuccess">返回</ons-back-button>
+		</div>
+		<div class="center">北京E追溯</div>
+		<div class="right">
+			<ons-toolbar-button ng-show="trace.isOnTraceCodeSuccess" ng-click="trace.scanCode()">扫一扫</ons-toolbar-button>
+		</div>
+	</ons-toolbar>
+	<div ng-if="!trace.isOnTraceCodeSuccess" class='h100' style="background-color: #000;">
+	</div>
+	<div style='overflow: hidden;' ng-if="!trace.showFeedback && trace.isLoadSuccess" ng-class="{pagecontentwhitecolor : trace.traceData}" class='w100 pagecontentgraycolor'>
+		<div ng-if="!trace.showFeedback && trace.isLoadSuccess" class='w100 h100 pagecontentgraycolor'>
+			<div align="center"  class='pagecontentwhitecolor' style="padding-top: 18px">
+				<img style='width:100px; height:100px;' ng-src="images/logo.png">
+			</div>
+			<div align="center" class='pagecontentwhitecolor' style="padding: 10px; overflow:hidden">
+				<span class="text_small colordgraydarktxt" >您查询的追溯码为【{{trace.getShowTraceCode()}}】</span>
+			</div>
+			<div style='height:15px' class='pagecontentgraycolor'>
+			</div>
+			<div style="padding: 0px 15px;" class='pagecontentgraycolor'
+				 ng-if="trace.isLoadFinish && !trace.traceData && !trace.showFeedback">
+				<div align="center"  style="padding-top: 18px">
+					<img style='width:230px; height:133px;' ng-src="images/sorry.png">
+				</div>
+				<p class="text_medium colordgraydarktxt" style='overflow:hidden;text-align: center;padding-bottom: 5%;'>
+					抱歉！没有找到“追溯码为<br>{{trace.getShowTraceCode()}}”的相关信息 </p>
+
+				<p class="text_medium colordgraytxt" style='width: 60%;margin: 0 auto;'>可能原因:</p>
+
+				<p class="text_small colordgraytxt" style='width: 60%;margin: 0 auto;padding-top: 3px;'>1.该产品没有产生追溯信息</p>
+
+				<p class="text_small colordgraytxt" style='width: 60%;margin: 0 auto;padding-top: 2px;'>2.该产品未纳入追溯体系</p>
+
+				<p class="text_small colordgraylighttxt" style='text-align: center;padding: 8% 0 18% 0;'
+				   ng-click='trace.showFeedback=true'>没有找到你想要的？反馈给我们</p>
+			</div>
+			<div  class='w100 pagecontentwhitecolor' style="padding: 0px 15px 10px 15px;" ng-if="trace.traceData">
+				<div style="padding: 10px 0px;">
+					<span class="text_medium colordgraydarktxt" >追溯信息</span>
+				</div>
+				<ons-row>
+					<ons-col width='65px'>
+						<div  style='height:3px;border-bottom:3px solid #22ab38;'></div>
+					</ons-col>
+					<ons-col>
+						<div  style='height:3px;border-bottom:1px solid #ccc;'></div>
+					</ons-col>
+				</ons-row>
+				<ons-row style='margin-top: 0px' align='bottom' ng-if='trace.traceData.area_origin_name' >
+					<ons-col width='65px' height='50px' >
+						<div style="width:50px; height:50px;background-image: url(images/chandi.png);
+					background-size: contain;background-repeat:no-repeat;"></div>
+					</ons-col>
+					<ons-col>
+						<ons-row align='center' height='46px' style="padding-top: 5px;height:46px; border-left:1px solid rgb(203,203,203);">
+							<ons-col align='center' width='8px'>
+								<div style="margin-left: -4px;width:8px; height:8px;float: left;background-image: url(images/circle.png);
+							background-size: contain;background-repeat:no-repeat;"></div>
+							</ons-col>
+							<ons-col align='left'>
+						<span style="padding-left: 13px;" class="text_medium colordgraydarktxt" >
+							产地</span>
+							</ons-col>
+						</ons-row>
+						<ons-row align='center' height='46px' style="margin-top: 0px;height:46px;border-left:1px solid rgb(203,203,203);" >
+							<ons-col  width='8px'>
+								<div style="margin-left: -4px;width:8px; height:8px;float: left;background-image: url(images/circle.png);
+							background-size: contain;background-repeat:no-repeat;"></div>
+							</ons-col>
+							<ons-col align='left'>
+								<div style='overflow: hidden;height:46px;background-color:#f6f6f6;padding:5px;margin-left:5px'>
+							<span class="itemtraceresult text_small colordgraytxt"
+								  ng-bind='trace.traceData.area_origin_name'></span>
+								</div>
+							</ons-col>
+						</ons-row>
+					</ons-col>
+				</ons-row>
+				<ons-row style='margin-top: 0px'  align='bottom' ng-if="trace.traceData.ws_supplier_name">
+					<ons-col width='65px'>
+						<div style="width:50px; height:50px;background-image: url(images/tuzai.png);
+							background-size: contain;background-repeat:no-repeat;"></div>
+					</ons-col>
+					<ons-col class='w100'>
+						<ons-row align='center' height='46px' style="padding-top: 5px;height:46px; border-left:1px solid rgb(203,203,203);" >
+							<ons-col align='center' width='8px'>
+								<div style="margin-left: -4px;width:8px; height:8px;float: left;background-image: url(images/circle.png);
+									background-size: contain;background-repeat:no-repeat;"></div>
+							</ons-col>
+							<ons-col align='left'>
+						<span style="padding-left: 13px;" class="text_medium colordgraydarktxt"
+							  ng-bind='trace.traceData.ws_supplier_type'>	</span>
+							</ons-col>
+						</ons-row>
+						<ons-row align='center' height='46px' style="margin-top: 0px;height:46px;border-left:1px solid rgb(203,203,203);" >
+							<ons-col  width='8px'>
+								<div style="margin-left: -4px;width:8px; height:8px;float: left;background-image: url(images/circle.png);
+							background-size: contain;background-repeat:no-repeat;"></div>
+							</ons-col>
+							<ons-col align='left'>
+								<div style='overflow: hidden;height:46px;background-color:#f6f6f6;padding:5px;margin-left:5px'>
+							<span class="itemtraceresult text_small colordgraytxt"
+								  ng-bind="trace.traceData.ws_supplier_name + (trace.traceData.supplier_name ?  '(' + trace.traceData.supplier_name + ')': '')"></span>
+								</div>
+							</ons-col>
+						</ons-row>
+					</ons-col>
+				</ons-row>
+				<ons-row style='margin-top: 0px;'  align='bottom' ng-if="trace.traceData.node_name">
+					<ons-col width='65px'>
+						<div style="width:50px; height:50px;background-image: url(images/chaoshi.png);
+					background-size: contain;background-repeat:no-repeat;"></div>
+					</ons-col>
+					<ons-col>
+						<ons-row align='center' height='46px' style="padding-top: 5px;height:46px;border-left:1px solid rgb(203,203,203);">
+							<ons-col align='center' width='8px'>
+								<div style="margin-left: -4px;width:8px; height:8px;float: left;background-image: url(images/circle.png);
+							background-size: contain;background-repeat:no-repeat;"></div>
+							</ons-col>
+							<ons-col align='left'>
+						<span style="padding-left: 13px;" class="text_medium colordgraydarktxt"
+							  ng-bind='trace.traceData.node_type'>	</span>
+							</ons-col>
+						</ons-row>
+						<ons-row align='center' height='46px' style="margin-top: 0px;height:46px;border-left:1px solid rgb(203,203,203);" >
+							<ons-col  width='8px'>
+								<div style="margin-left: -4px;width:8px; height:8px;float: left;background-image: url(images/circle.png);
+							background-size: contain;background-repeat:no-repeat;"></div>
+							</ons-col>
+							<ons-col align='left'>
+								<div style='overflow: hidden;height:46px;background-color:#f6f6f6;padding:5px;margin-left:5px'>
+							<span class="itemtraceresult text_small colordgraytxt"
+								  ng-bind="trace.traceData.node_name + ((trace.traceData.biz_name ?  '(' + trace.traceData.biz_name + ')': ''))"></span>
+								</div>
+							</ons-col>
+						</ons-row>
+					</ons-col>
+				</ons-row>
+			</div>
+		</div>
+	</div>
+
+	<div ng-if="trace.showFeedback" class='h100 pagecontentgraycolor'>
+		<div style="padding-bottom:1px;" class='pagecontentwhitecolor' >
+			<div style="height:110px;">
+			  <textarea type="text"
+						style='padding:10px 15px;height:110px;background-color:rgba(0,0,0,0);'
+						maxlength="100"
+						name='serachstr'
+						class="text_small form-control a_form-control"
+						ng-model="trace.feedbackStr"
+						placeholder="请输入您的反馈意见"></textarea>
+			</div>
+			<div style="margin:5px;">
+				<ons-row align='right'>
+					<ons-col>
+						<span class="text_micro colordgraydarktxt" ng-bind="trace.feedbackStr.length +  '/100'"></span>
+					</ons-col>
+				</ons-row>
+			</div>
+			<div style='height:7px' class='pagecontentgraycolor'>
+			</div>
+			<div style="margin:13px 0px 5px 13px;">
+				<span class="text_small colordgraydarktxt" >请留下您的联系方式，以便我们回复您</span>
+			</div>
+			<div style="margin:0px 20px 0px 20px;border-bottom: 1px solid rgb(221,221,221);">
+				<ons-row >
+					<ons-col width='50px' align='center'>
+						<span class="text_small colordgraydarktxt">姓　名:</span>
+					</ons-col>
+					<ons-col >
+						<input type="text"
+							   maxlength="10"
+							   style='padding:3px 16px;height:38px'
+							   name='serachstr'
+							   class="text_small form-control a_form-control"
+							   ng-model="trace.feedbackName"
+							   placeholder="联系人姓名(选填)"></input>
+					</ons-col>
+				</ons-row>
+			</div>
+			<div  style="margin:0px 20px 5px 20px;border-bottom: 1px solid rgb(221,221,221);">
+				<ons-row>
+					<ons-col width='50px' align='center'>
+						<span class="text_small colordgraydarktxt">手机号:</span>
+					</ons-col>
+					<ons-col>
+						<input type="text"
+							   maxlength="15"
+							   style='padding:3px 16px;height:38px'
+							   name='serachstr'
+							   class="text_small form-control a_form-control"
+							   ng-model="trace.feedbackPhone"
+							   placeholder="联系人电话(选填)"></input>
+					</ons-col>
+				</ons-row>
+			</div>
+		</div>
+		<div style="padding:35px 20px;" class='pagecontentgraycolor'>
+			<input type='submit' ng-click='trace.feedback()'
+				   value='确定'
+				   class='ng-isolate-scope button effeckt-button button--lkl--large--cta slide-left'
+			></input>
+		</div>
+	</div>
+	<div ng-if='!trace.isLoadSuccess' style="position: absolute; left: 0px; top: 0px; bottom:0px;right:0px;" class='pagecontentgraycolor'>
+		<div align="center"  style="padding-top: 40%">
+			<img style='width:88px; height:88px;' ng-src="images/load_page_failed.png">
+		</div>
+		<div style="padding: 0px 15px; ">
+			<p class="text_medium colordgraytxt" style='margin: 0px 0px 10px 0px; overflow:hidden;text-align: center;'>
+				页面加载失败</p>
+		</div>
+		<ons-row align='center' ng-click='trace.reloadTraceCode()'>
+			<ons-col>
+				<span class="grayborderbtn itemtexttitle text_small" style='width:100px' >重新加载</span>
+			</ons-col>
+		</ons-row>
+	</div>
+</ons-page>

@@ -1,0 +1,96 @@
+<ons-page var='lkl.page.cameraList' data-ng-init="cameraloader.autoCarousel();"> 
+<ons-toolbar>
+	<div class="left"  ng-click="cameraloader.showSetup()">
+		<ons-toolbar-button >
+			<ons-icon style="color:#fefefe;" icon="ion-gear-a"></ons-icon>
+		</ons-toolbar-button>
+	</div>
+	<div class="center" ng-click="loginout()"></div>
+	<div class="right" ng-click="cameraloader.showMap()">
+		<ons-toolbar-button >地图版</ons-toolbar-button>
+	</div>
+</ons-toolbar> 
+
+<ons-scroller style="position: absolute; left: 0px; top: 0px; bottom:40px;right:0px;" class='pagecontentgraycolor'>
+	<ons-carousel var='recommendCarousel'   swipeable overscrollable auto-scroll style="width: 100%; height: 200px">
+	 <ons-carousel-item ng-click="cameraloader.clickRecommend(data)" ng-repeat='data in recommendInfo.recommendArr'  >
+      	<div style=" position:absolute; right:0px; left:0px; width: 100%; 
+      		 height: 30px; bottom: 0px; padding: 5px; background-color: rgba(30,30,30,0.5);">
+      	<span ng-bind='data.name' style="color:white;"></span>	
+      	</div>
+      	<img class='h100 w100' src={{data.img}}></img>
+	 	<!-- <div class='h100' style="background-image:url({{data.img}});background-repeat:no-repeat;background-size:100% 100%;"></div> -->
+    	 <div class='xxsmall' style='text-align: center; height:20px;position: absolute; left: 0px; bottom: 0px; right:0px;'>
+			<ons-icon ng-repeat='data in recommendInfo.recommendArr' style='padding-right: 3px;' icon='ion-record'
+			ng-class="{color03b8ee:$index==$parent.$index,colord7d7d7:$index!=$parent.$index}"
+			></ons-icon>
+		</div>
+    </ons-carousel-item>
+   <!--  <ons-carousel-item >
+      <div class='h100' style="background-image:url('images/welcome.jpg');background-repeat:no-repeat;background-size:100% 100%;"></div>
+      	<div class="item-label">BLUE</div>
+    </ons-carousel-item> -->
+    </ons-carousel>
+	<div>
+		<div class="itemdivcontent">
+			<ons-list-item  style="border-bottom:0px" ng-click="cameraloader.showForeshow()" modifier="tappable">
+			<ons-row style='margin:0px;padding:10px 0px'>
+				<ons-col align='center' width='25px'>
+					<ons-icon style="color:#05aae8;" icon="ion-videocamera"></ons-icon>
+				</ons-col> 
+				<ons-col align='center'>
+					<ons-row class="itemrowcommon" >
+						<span class="itemtexttitle" ></span>
+					</ons-row>
+				</ons-col>
+			</ons-row>
+			</ons-list-item>
+		</div>
+		<div ng-if="cameraloader.videoArr.length!=0" ng-repeat='data in cameraloader.videoArr' class="itemdivcontent">
+			<ons-list-item  style="border-bottom:0px" ng-click="cameraloader.showLiveFromList(data)" modifier="tappable">
+			<ons-row style='margin:0px;padding:10px 0px'>
+				<ons-col align='center' width='25px'>
+					<ons-icon style="color:#05aae8;" icon="ion-videocamera"></ons-icon>
+				</ons-col> 
+				<ons-col align='left'>
+					<ons-row class="itemrowcommon">
+						<span class="itemtexttitle" ng-bind="data.video_name"></span>
+					</ons-row>
+					<ons-row class="itemrowcommon">
+						<span class="itemtextcontent" ng-bind="data.video_desc"></span>
+					</ons-row>
+					<ons-row class="itemrowcommon" ng-if="data.starttime && data.endtime">
+						<span class="itemtextcontent" ng-bind="data.starttime + ' 至  ' + data.endtime"></span>
+					</ons-row>
+				</ons-col>
+				<ons-col align='center'  width='70px' ng-if="data.thumbnail">
+					<img style="width:70px;height:50px;vertical-align: middle;" ng-src="{{ImgBase + data.thumbnail}}" />
+				</ons-col>
+			</ons-row>
+			</ons-list-item>
+		</div>
+		<!-- <div style='padding:10px 18px'>
+		<ons-button ng-click="jobInviteList.createJobInviteInfo()"
+					modifier="lkl--large--cta2">创建新职位</ons-button>
+		</div> -->
+	</div>
+</ons-scroller> 
+<div class='h40px shadow' style='bottom:0px;left:0px;right:0px;position:absolute;background-color:white;'>
+		<ons-row class="itemhandlerrow" style='overflow:hidden;background-color:rgb(255,255,255);'>
+		<ons-col align='center' ng-repeat='data in typeInfo.typeMainArr' >
+			<div class="itemhandlerbtn"   ng-click="typeInfo.selectType(data)">
+				<img style="width:30px;height:30px;vertical-align:middle;" ng-src="{{ImgBase + data.type_icon}}" />
+				<span class='itemtextsubtitle' ng-bind="data.name"></span>
+			</div>
+			<div style="height:5px" ng-class="{status:true,active:(typeInfo.selectedType==data)}"></div>
+		</ons-col>
+		<ons-col align='center'>
+			<div class="itemhandlerbtn"   ng-click="typeInfo.selectMoreType()">
+				<img style="width:30px;height:30px;vertical-align:middle;" ng-src="{{(typeInfo.moreType.isNoPre?'' : ImgBase) + typeInfo.moreType.type_icon}}" />
+				<span class='itemtextsubtitle' ng-bind="typeInfo.moreType.name"></span>
+			</div>
+			<div style="height:5px" ng-class="{status:true,active:(typeInfo.selectedType==typeInfo.moreType)}"></div>
+		</ons-col>
+	</ons-row>
+</div>
+</ons-page>

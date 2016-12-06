@@ -1,0 +1,250 @@
+.timepicker{
+	width: 30%;
+}
+.timepicker .hour{
+	float:left;
+	width:50%;
+	text-align:center;
+}
+.timepicker .minute{
+	float:left;
+	width:50%;
+	text-align:center;
+}
+.inputchange{
+	position: relative;
+	display: inline-block;
+	vertical-align: top;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	-webkit-background-clip: padding-box;
+	background-clip: padding-box;
+	padding: 0;
+	margin: 0;
+	font: inherit;
+	background: transparent;
+	border: none;
+	line-height: normal;
+	font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-weight: 400;
+	font-size: 17px;
+	cursor: default;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	height: auto;
+	text-decoration: none;
+	padding: 4px 10px;
+	font-size: 17px;
+	line-height: 32px;
+	letter-spacing: 0;
+	text-shadow: 0 1px none;
+	vertical-align: middle;
+	background-color: rgba(255,255,255,1);
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	border: 0px solid currentColor;
+	-webkit-border-radius: 3px;
+	border-radius: 0px;
+	-webkit-transition: none;
+	-moz-transition: none;
+	-o-transition: none;
+	transition: none;
+	border: none;
+	background-color: white;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	color: black;
+	text-shadow: none;
+}
+.calendar {
+    width: 90%;
+    background: white;
+}
+
+.calendar .head {
+    overflow: hidden;
+    border-bottom: 1px solid #9999A9;
+}
+
+.calendar .body {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 190px;
+    -webkit-animation-duration: 0.4s;
+    animation-duration: 0.4s;
+}
+
+.calendar .days {
+    width: 100%;
+    height: 190px;
+}
+
+.calendar .nav {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    height: 30px;
+}
+
+.calendar .button {
+    z-index: 1;
+    position: absolute;
+}
+
+.calendar .button:hover, .calendar .day:hover {
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.calendar .current.button {
+    z-index: 0;
+    width: 100%;
+    left: 0;
+    text-align: center;
+}
+
+.calendar .prev.button {
+
+    left: 0;
+}
+
+.calendar .next.button {
+    right: 0;
+}
+
+
+.calendar .day, .calendar .head > div {
+    float: left;
+    width: 14%;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    vertical-align: middle;
+    word-wrap: break-word;
+    border: 1px solid transparent;
+}
+
+.calendar .day[aria-selected=true] {
+    background: #87cefa;
+}
+
+.calendar .day.other-month {
+    opacity: 0.6;
+}
+
+.calendar .day.today {
+    border: 1px solid #9999A9;
+}
+
+.slidein-from-right .body {
+	/*
+    -webkit-animation-name: calendar-slidein-from-right;
+    animation-name: calendar-slidein-from-right;
+    */
+}
+.slidein-from-left .body {
+	/*
+    -webkit-animation-name: calendar-slidein-from-left;
+    animation-name: calendar-slidein-from-left;
+    */
+}
+
+@keyframes calendar-slidein-from-right {
+    10% {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+
+    11% {
+        transform: translateX(50px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0px);
+    }
+}
+
+@-webkit-keyframes calendar-slidein-from-right {
+    10% {
+        opacity: 0;
+        -webkit-transform: translateX(-30px);
+    }
+
+    11% {
+        -webkit-transform: translateX(50px);
+    }
+
+    to {
+        opacity: 1;
+        -webkit-transform: translateX(0px);
+    }
+}
+
+@keyframes calendar-slidein-from-left {
+    10% {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+
+    11% {
+        transform: translateX(-50px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0px);
+    }
+}
+
+@-webkit-keyframes calendar-slidein-from-left {
+    10% {
+        opacity: 0;
+        -webkit-transform: translateX(30px);
+    }
+
+    11% {
+        -webkit-transform: translateX(-50px);
+    }
+
+    to {
+        opacity: 1;
+        -webkit-transform: translateX(0px);
+    }
+}
+
+.popout {
+    position: absolute;
+    z-index: 100;
+    top:0px;
+    bottom:0px;
+    right:0px;
+    left:0px;
+    background-color: rgba(0,0,0,.8);
+}
+
+.transitioned {
+    transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+}
+
+.collapsedY {
+    opacity: 0;
+    transform-origin: center top;
+    -webkit-transform-origin: center top;
+    -moz-transform-origin: center top;
+
+    transform: scaleY(0);
+    -webkit-transform: scaleY(0);
+    -moz-transform: scaleY(0);
+}

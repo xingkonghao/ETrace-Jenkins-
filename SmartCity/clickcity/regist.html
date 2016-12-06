@@ -1,0 +1,243 @@
+<ons-page var='lkl.page.regist' ng-controller='regist'> <ons-toolbar>
+<div class="center">注册</div>
+</ons-toolbar> <ons-scroller class='h100 pagecontentcolor'>
+<div class='h100'>
+	<div class='pagecontentdiv'>
+		<form name='registForm' ng-submit='complete()' novalidate>
+			<p></p>
+			<div>
+				<ons-row> 
+					<ons-col align="center" class='alignright'>
+						<lable>所属国家/地区</lable>
+					</ons-col>
+					<ons-col width='20px'></ons-col>
+					<ons-col align="center" class='alignleft'>
+						<select class='radius' style='border: 1px solid #ddd !important;' ng-model="regist.areaCode" >
+							<option value='+86'>中国</option>
+						</select>
+					</ons-col>
+				</ons-row> 
+			</div>
+			<p></p>
+			<div>
+				<ons-row>
+					<ons-col align="center" class='alignright'>
+						<label>手机号: </label><lable ng-bind='regist.areaCode'></lable>
+					</ons-col>
+					<ons-col width='20px'></ons-col>
+					<ons-col align="center" class='alignleft'>
+						<input type='text' 
+							placeholder='手机号'
+							required
+							name='cellphone'
+							ng-model='regist.cellphone'
+							class='text-input w90'></input>
+							<span style='color:red;display: inline-block;padding-top: 10px;'>*</span>
+					</ons-col>
+				</ons-row>
+			</div>
+			<p></p>
+			<div>
+				<ons-row> 
+					<ons-col align="center" class='alignright'>
+						<lable>验证码</lable>
+					</ons-col>
+					<ons-col width='20px'></ons-col>
+					<ons-col align="center" class='alignleft'>
+						<input type='text' class='w100px padding5px radius'
+							required
+							name='vercode'
+							ng-model='regist.vercode' 
+							placeholder='输入校验码'></input>
+							<span style='color:red;'>*</span>
+					</ons-col>
+				</ons-row>
+			</div>
+			<p></p>
+			<div>
+				<ons-row> 
+					<ons-col align="center" class='alignright'>
+					</ons-col>
+					<ons-col width='20px'></ons-col>
+					<ons-col align="center" class='alignleft'>
+						<ons-button 
+							disabled="{{regist.btnVerCodeLock}}" 
+							class='smaller padding2px'
+							modifier='outline'
+							ng-click='getVerCode()'
+							ng-bind='regist.btnTxtVerCode'> </ons-button>
+					</ons-col>
+				</ons-row>
+			</div>
+			<p></p>
+			<hr />
+			<div ng-if="false">
+				<hr />
+				<p></p>
+				<div>
+					<label> <input type="radio" 
+						name="registType"
+						ng-model="regist.registType" 
+						value="{{findJobID}}"></input> {{findJob}}
+					</label> <label> <input type="radio" 
+						name="registType"
+						ng-model="regist.registType" 
+						value="{{findPersonID}}"></input> {{findPerson}}
+					</label>
+				</div>
+				<p></p>
+				<hr />
+			</div>
+			<p ng-show="(regist.registType == findPersonID)"></p>
+			<div ng-show="(regist.registType == findPersonID)">
+				<label> <input type="radio" 
+					name="islockedphone"
+					ng-model="regist.islockedphone"
+					value='0'
+					></input>手机号登录
+				</label> <label> <input type="radio" 
+					name="islockedphone"
+					value='1'
+					ng-model="regist.islockedphone"></input> 用户名登陆
+				</label>
+			</div>
+			<div ng-show='regist.registType == findPersonID'>
+				<p ng-show="regist.islockedphone==1"></p>
+				<div ng-show="regist.islockedphone==1">
+					<ons-row> 
+						<ons-col width='20%' align="center" class='alignright'>
+						</ons-col>
+						<ons-col align="center" class='alignleft'>
+							<span class='smaller' style='color:red;'>选择此项,将禁用手机号登录,如果想启用手机号登录,请登录后在“空间-设置“中修改</span>
+						</ons-col>
+					</ons-row>
+				</div>
+			</div>
+			<!--  
+			<div ng-show="(regist.registType == findPersonID)">
+				<ons-row> 
+					<ons-col align="center" class='alignright'>
+						<span>禁用手机号登录</span>
+					</ons-col>
+					<ons-col width='20px'></ons-col>
+					<ons-col align="center" class='alignleft'>
+						<ons-switch ng-model='regist.islockedphone' ></ons-switch>
+					</ons-col>
+				</ons-row>
+				</div>
+				-->			
+			<div ng-show='regist.registType == findPersonID'>
+				<p ng-show="regist.islockedphone==1"></p>
+				<div ng-show="regist.islockedphone==1">
+					<ons-row> 
+						<ons-col align="center" class='alignright'>
+							<label>登录名</label>
+						</ons-col>
+						<ons-col width='20px'></ons-col>
+						<ons-col align="center" class='alignleft'>
+							<input type='text'
+								placeholder='5-20位'
+								ng-required="(regist.islockedphone==1 && regist.registType == findPersonID)"
+								ng-minlength='5'
+								ng-maxlength='20'
+								name='loginname'
+								ng-model='regist.loginname'
+								ng-blur='checkloginname(registForm.loginname)'
+								class='text-input w90'></input> 
+								<span style='color:red;display: inline-block;padding-top: 10px;'>*</span>
+						</ons-col>
+					</ons-row>
+				</div>
+			</div>
+			<div ng-if='regist.registType == findPersonID && regist.islockedphone==1 && registForm.loginname.$dirty && registForm.loginname.$invalid'>
+				<ons-row>
+					<ons-col align="center" class='alignright'>
+					</ons-col>
+					<ons-col width='20px'></ons-col>
+					<ons-col align="center" class='alignleft'>
+						<div class='smaller' style='color:red;' ng-if='registForm.loginname.$error.minlength'><p></p>不足5位</div>
+						<div class='smaller' style='color:red;' ng-if='registForm.loginname.$error.maxlength'><p></p>不能大于20位</div>
+						<div class='smaller' style='color:red;' ng-if='registForm.loginname.$error.isrepeat'><p></p>登录名已存在</div>
+					</ons-col>
+				</ons-row>
+			</div>
+			<p></p>
+			<div>
+				<ons-row> 
+					<ons-col align="center" class='alignright'>
+						<label>设置密码</label>
+					</ons-col>
+					<ons-col width='20px'></ons-col>
+					<ons-col align="center" class='alignleft'>
+						<input type='password'
+							required
+							name='password'
+							placeholder='6-20位'
+							ng-minlength='6'
+							ng-maxlength='20'
+							ng-model='regist.password' 
+							check-by-fn
+							check-fn = 'compare(registForm)'
+							class='text-input w90'></input> 
+							<span style='color:red;display: inline-block;padding-top: 10px;'>*</span>
+					</ons-col>
+				</ons-row>
+			</div>
+			<div ng-if='registForm.password.$dirty && registForm.password.$invalid'>
+				<ons-row>
+					<ons-col align="center" class='alignright'>
+					</ons-col>
+					<ons-col width='20px'></ons-col>
+					<ons-col align="center" class='alignleft'>
+						<div class='smaller' style='color:red;' ng-if='registForm.password.$error.minlength'><p></p>不足6位</div>
+						<div class='smaller' style='color:red;' ng-if='registForm.password.$error.maxlength'><p></p>不能大于20位</div>
+						<div class='smaller' style='color:red;' ng-if='registForm.password.$error.isequals'><p></p>两次密码不一致</div>
+					</ons-col>
+				</ons-row>
+			</div>
+			<p></p>
+			<div>
+				<ons-row> 
+					<ons-col align="center" class='alignright'>
+						<label>确认密码</label>
+					</ons-col>
+					<ons-col width='20px'></ons-col>
+					<ons-col align="center" class='alignleft'>
+						<input
+							required
+							placeholder='6-20位'
+							ng-minlength='6'
+							ng-maxlength='20' 
+							type='password'
+							name='verpass'
+							ng-model='regist.verpass' 
+							check-by-fn
+							check-fn = 'compare(registForm)'
+							class='text-input w90'></input>
+							<span style='color:red;display: inline-block;padding-top: 10px;'>*</span>
+					</ons-col>
+				</ons-row>
+			</div>
+			<div ng-if='registForm.verpass.$dirty && registForm.verpass.$invalid'>
+				<ons-row>
+					<ons-col align="center" class='alignright'>
+					</ons-col>
+					<ons-col width='20px'></ons-col>
+					<ons-col align="center" class='alignleft'>
+						<div class='smaller' style='color:red;' ng-if='registForm.verpass.$error.minlength'><p></p>不足6位</div>
+						<div class='smaller' style='color:red;' ng-if='registForm.verpass.$error.maxlength'><p></p>不能大于20位</div>
+						<div class='smaller' style='color:red;' ng-if='registForm.verpass.$error.isequals'><p></p>两次密码不一致</div>
+					</ons-col>
+				</ons-row>
+			</div>
+			<p></p>
+			<div style="margin-bottom:20px">
+				<input type='submit' ng-disabled='registForm.$invalid'
+					value='完成'
+					class='ng-isolate-scope button effeckt-button button--lkl--large--cta slide-left'
+					></input>
+			</div>
+		</form>
+	</div>
+</div>
+</ons-scroller> </ons-page>

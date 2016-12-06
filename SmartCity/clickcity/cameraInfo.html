@@ -1,0 +1,64 @@
+<ons-page var='lkl.page.camerainfo' ng-controller='camerainfo'> 
+<ons-toolbar>
+	<div class="left">
+		<ons-back-button></ons-back-button>
+	</div>
+	<div class="center">{{title}}</div>
+</ons-toolbar>
+<ons-scroller class='h100 pagecontentcolor'>
+<div class='h100'>
+	<div class='pagecontentdiv' style="padding-top:10px;">
+		<form name='camerainfoForm' ng-submit='submit(camerainfoForm)' novalidate>
+		<div class='pageformdiv'>
+			<ons-row  align="center"> 
+				<ons-col  width='40px'><label>名称</label> </ons-col>
+				<ons-col  width='8px' ><hr class="formhr"/></ons-col>
+				<ons-col  >
+					<input  type='text' 
+						ng-class="{'text-input--underbar':true,w100:true,myinvalid:(camerainfoForm.name.$dirty && camerainfoForm.name.$invalid)}"
+						name='name' 
+						required 
+						ng-model='cameraInfo.name'
+						placeholder='输入名称'></input>
+				</ons-col>
+			</ons-row>
+			<ons-row  align="center"> 
+				<ons-col  width='40px'><label>类型</label> </ons-col>
+				<ons-col  width='8px' ><hr class="formhr"/></ons-col>
+				<ons-col >
+					<input type='text' required ng-model='typeInfo.typeDic[cameraInfo.typeid].name' readonly="readonly" name="type" 
+						ng-click="showTypeChoice()" 
+						ng-class="{'text-input--underbar':true,w100:true,myinvalid:(camerainfoForm.type.$dirty && camerainfoForm.type.$invalid)}"
+						placeholder="请选择类型"></input> 
+				</ons-col>
+			</ons-row>
+			<ons-row  align="center"> 
+				<ons-col  width='80px'><label>详细地址</label> </ons-col>
+				<ons-col  width='8px' ><hr class="formhr"/></ons-col>
+				<ons-col>
+						<textarea rows="3" required name="address" ng-model='cameraInfo.address' 
+					 	ng-class="{textarea:true,w100:true,myinvalid:(camerainfoForm.address.$dirty && camerainfoForm.address.$invalid)}"
+					 	placeholder="请输入地址"></textarea>
+				</ons-col>
+			</ons-row>
+		<div ng-show="camerainfoForm.$dirty && camerainfoForm.$invalid">
+      		<div class="alert alert-danger" style="text-align:left; margin: 0px">
+        	<ul style="margin: 0px">
+        	  <li ng-show="camerainfoForm.name.$dirty && camerainfoForm.name.$invalid">名称为空！</li>
+        	  <li ng-show="camerainfoForm.type.$dirty && camerainfoForm.type.$invalid">类型为空！</li>
+	          <li ng-show="camerainfoForm.address.$dirty && camerainfoForm.address.$invalid">地址为空！</li>
+        	</ul>
+      		</div>
+		</div>
+		
+		<div style='padding:10px 18px'>
+			<input type='submit'
+				ng-disabled='camerainfoForm.$invalid'
+				class='ng-isolate-scope button effeckt-button button--lkl--large--cta2 slide-left'
+				value='{{completeBtnTxt}}'></input>
+		</div>
+		</form>
+	</div>
+</div>
+</ons-scroller> 
+</ons-page>

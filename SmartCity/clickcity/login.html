@@ -1,0 +1,70 @@
+<ons-page var='lkl.page.login' ng-controller='login'>
+<ons-toolbar>
+	<div class="left">
+		<ons-back-button></ons-back-button>
+	</div>
+	<div class="center">登录</div>
+</ons-toolbar>
+<ons-scroller class='h100 loginbg'>
+<div class='h100'>
+	<div class='pagecontentdiv'>
+		<form name="formLogin" ng-submit="submit()" novalidate>
+			<div class='pagecontenttopwhite'></div>
+			<div class='pagecontentsection' style='height:100px;margin-bottom: 50px;'>
+				<img style='width:100px;' ng-src='images/logo.jpg' />
+			</div>
+			<div style='padding:5px'>
+				<div class="input-group shadow">
+				  <span class="input-group-addon a_input-group-addon" >
+				  	<img style='width:20px;' src='images/userlabel.png'/>
+				  </span>
+				  <input type="text" 
+						class="form-control a_form-control" 
+						ng-model="loginname"
+						required
+						name='loginname'
+						focus-selectall
+						placeholder="登录名"></input>
+				</div>
+			</div>
+			<p></p> 
+			<div style='padding:5px'> 
+				<div class="input-group shadow">
+				  <span class="input-group-addon a_input-group-addon" >
+				  	<img style='width:20px;' src='images/passwordlabel.png'/>
+				  </span>
+					<input type="password" 
+						class="form-control a_form-control" 
+						name='password'
+						ng-model="password"
+						required
+						focus-selectall
+						placeholder="密码"></input>
+				</div>
+			</div>
+			<p></p> 
+			<div class='pagecontentsection'>
+				<input type='submit' ng-disabled='formLogin.$invalid'
+					value='登录'
+					class='ng-isolate-scope button effeckt-button button--lkl--large--cta slide-left'
+					></input>
+			</div> 
+			<div class='pagecontentsection'>
+				<div class='textshadow' ng-if="false">
+					<ons-row class='margin0'>
+						<ons-col class='alignleft'>
+							<a ng-click="toRegist()"
+								class='colorwhite'>注册账号</a>
+						</ons-col>
+						<ons-col class='alignright'>
+							<a ng-click="toForgetPassword()"
+								class='colorwhite'>忘记密码</a>
+						</ons-col>
+					</ons-row>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+</ons-scroller>
+</ons-page>

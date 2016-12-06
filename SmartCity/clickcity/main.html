@@ -1,0 +1,28 @@
+<ons-page var='lkl.page.main' var-inited inited-fn='lisener()' ng-controller='main'>
+<ons-tabbar var='lkl.tabbar.main' style='border-top:1px solid black;' animation="none">
+	<ons-tab page="{{tabbar.one.html}}" active="true">
+		<div style='line-height:normal;padding-top:4px;'>
+			<img style="width:30px;height:30px;" ng-src="{{tabbar.one.image}}" />
+    		<span class='xxsmall' style="display:block;position:relative;top:-5px;">{{tabbar.one.label}}</span>
+		</div>
+    </ons-tab>
+    <ons-tab page="{{tabbar.two.html}}">
+		<div style='line-height:normal;padding-top:4px;'>
+			<img style="width:30px;height:30px;" ng-src="{{tabbar.two.image}}" />
+    		<span class='xxsmall' style="display:block;position:relative;top:-5px;">{{tabbar.two.label}}</span>
+		</div>
+    </ons-tab>
+    <ons-tab page="{{tabbar.three.html}}">
+		<div style='line-height:normal;padding-top:4px;'>
+			<img style="width:30px;height:30px;" ng-src="{{tabbar.three.image}}" />
+    		<span class='xxsmall' style="display:block;position:relative;top:-5px;">{{tabbar.three.label}}</span>
+		</div>
+    </ons-tab>
+    <ons-tab page="{{tabbar.four.html}}">
+		<div style='line-height:normal;padding-top:4px;'>
+			<img style="width:30px;height:30px;" ng-src="{{tabbar.four.image}}" />
+    		<span class='xxsmall' style="display:block;position:relative;top:-5px;">{{tabbar.four.label}}</span>
+		</div>
+    </ons-tab>
+</ons-tabbar>
+</ons-page>
